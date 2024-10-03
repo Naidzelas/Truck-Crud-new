@@ -1,8 +1,10 @@
 Run project in terminal
+
     npm run dev 
     php artisan serve
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-TODOS
+TODOS:
+
     1. fix isAvailable() to cover all cases for date coverage.
     2. add check to isAvailable() if subunit is already planned on other transport.
     3. add note insert function.
