@@ -42,7 +42,7 @@
                                 >
                                 <DatePicker
                                     :format="format"
-                                    v-model="form.date"
+                                    v-model="date"
                                     :enable-time-picker="false"
                                     :format-locale="lt"
                                     dateFormat="yy/mm/dd"
@@ -64,24 +64,26 @@
                         >
                             <div
                                 v-for="availableTransport in pageVariables.availableTransports"
+                                :key="availableTransport.unit_number"
                             >
                                 <!-- available transport -->
                                 <div
                                     v-if="
                                         availableTransport.unit_number !=
                                         transport
-                                        
+                                        && isAvailable(availableTransport.unit_number)
                                     "
                                 >
                                     <input
                                         type="radio"
                                         @input="form.subunit = availableTransport.unit_number"
                                         name="subunit"
-                                        class="peer"
+                                        :id="'subunit-' + availableTransport.unit_number"
+                                        class="peer sr-only"
                                     />
                                     <label
-                                        for="subunit"
-                                        class="flex bg-[#F2F2F2] space-x-4 p-4 2 text-gray-800 border border-gray-800 rounded-lg cursor-pointer peer-checked:border-[#4F0062] peer-checked:text-[#4F0062] hover:text-black hover:bg-gray-200"
+                                        :for="'subunit-' + availableTransport.unit_number"
+                                        class="flex bg-[#F2F2F2] space-x-4 p-4 2 text-gray-800 border border-gray-800 rounded-lg cursor-pointer peer-checked:border-[#4F0062] peer-checked:bg-[#f6e6fa] peer-checked:text-[#4F0062] hover:text-black hover:bg-gray-200"
                                     >
                                         <Icon
                                             icon="mdi:truck"
@@ -97,7 +99,7 @@
                                     <input
                                         type="radio"
                                         name="subunit"
-                                        class="peer"
+                                        class="peer hidden"
                                         disabled
                                     />
                                     <label
@@ -161,11 +163,11 @@
 </template>
 
 <script setup>
-import { Link, useForm, router } from "@inertiajs/vue3";
-import { ref, onMounted, watch } from "vue";
+import { Link, useForm } from "@inertiajs/vue3";
+import { ref, onMounted, watch, nextTick, computed } from "vue";
 import DatePicker from "@vuepic/vue-datepicker";
 import "@vuepic/vue-datepicker/dist/main.css";
-import { lt } from "date-fns/locale";
+import { lt, se } from "date-fns/locale";
 
 let pageVariables = defineProps({
     transport: String,
@@ -173,22 +175,26 @@ let pageVariables = defineProps({
     availableTransports: Object,
 });
 
-const date = ref();
+const date = ref([]);
 const form = useForm({
     date: [],
     transport: pageVariables.transport,
     subunit: null,
 });
 
-
 onMounted(() => {
     const startDate = new Date();
     const endDate = new Date(new Date().setDate(startDate.getDate() + 7));
     date.value = [startDate, endDate];
+    form.date = date.value;
+    firstDate = computed(() => form.date[0]);
+    secondDate = computed(() => form.date[1]);
 });
 
 watch(date, (newDate) => {
     form.date = newDate;
+    firstDate = form.date[0];
+    secondDate =  form.date[1];
 });
 
 const format = (date) => {
@@ -198,15 +204,25 @@ const format = (date) => {
         return "Invalid date range";
     }
 };
+let firstDate = computed(() => form.date[0]);
+let secondDate = computed(() => form.date[1]);
 
-// let dates = form.date;
-// console.log(dates);
-// function checkSomething(test){
-//     // console.log(pageVariables.transportsUnits[test]);
-//     let object = pageVariables.transportsUnits;
-//     // console.log(Object.entries(object)[1][1][0]['start_date']);
-//     console.log(toRaw(result));
-//     return true;
-// }
+const isAvailable = (truck) => {
+    if(pageVariables.transportsUnits[truck]){
+        let start = new Date(Object.entries(pageVariables.transportsUnits[truck])[0][1]['start_date']);
+        let end = new Date(Object.entries(pageVariables.transportsUnits[truck])[0][1]['end_date']);
+        if (firstDate && secondDate) {
+            if(start >= firstDate && start <= secondDate || end <= secondDate && end <= firstDate){
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            console.error('First date or second date is not defined.');
+            return false;
+        }
+    }
+    return true;
+}
 
 </script>
