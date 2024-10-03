@@ -212,7 +212,10 @@ const isAvailable = (truck) => {
         let start = new Date(Object.entries(pageVariables.transportsUnits[truck])[0][1]['start_date']);
         let end = new Date(Object.entries(pageVariables.transportsUnits[truck])[0][1]['end_date']);
         if (firstDate && secondDate) {
-            if(start >= firstDate && start <= secondDate || end <= secondDate && end <= firstDate){
+            if((start >= firstDate && start <= secondDate) 
+                || (start >= firstDate && start <= secondDate) 
+                    || (end <= secondDate && end <= firstDate)
+                        || (end >= secondDate && end <= firstDate)){
                 return true;
             } else {
                 return false;

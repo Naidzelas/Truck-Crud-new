@@ -6,6 +6,7 @@ use App\Models\Transports\TransportSubunit;
 use App\Http\Controllers\Controller;
 use App\Models\Transports\Transport;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 use Inertia\Inertia;
 
 class TransportUnitController extends Controller
@@ -32,22 +33,16 @@ class TransportUnitController extends Controller
         ]);
     }
 
-    public function update(Request $request, TransportSubunit $transportSubunit)
-    {
-        // $this->validate($request, [
-        //     'main_truck' => 'string',
-        //     'subunit' => 'string',
-        //     'start_date' => 'datetime',
-        //     'end_date' => 'datetime',
-        // ]);
-       
-        $transportSubunit->fill($request->validated())->save();
-        return view('transports.index');
-
-    }
-
     public function store(Request $request, TransportSubunit $transportSubunit)
     {
+
+        // $validated = $request->validate([
+        //     'main_truck' => 'required|string',
+        //     'subunit' => 'required|string',
+        //     'start_date' => 'required|string',
+        //     'end_date' => 'required|string',
+        // ]);
+// dd($test);
         $transportSubunit->create([
             'main_truck' => $request->transport,
             'subunit' => $request->subunit,

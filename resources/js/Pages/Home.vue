@@ -7,9 +7,9 @@
                 method="get"
                 as="button"
                 type="button"
-                class="bg-[#956E6E] w-32 h-8 self-end mb-2 text-white font-semibold text-xl"
+                class="bg-[#956E6E] w-32 h-8 self-end mb-2 text-white text-xl"
                 :only="['transports']"
-                >create trucks</Link
+                >Seed data</Link
             >
             <div class="bg-[#600000] w-full h-1/2 mb-8"></div>
             <div class="grid grid-cols-6 gap-10 self-center">

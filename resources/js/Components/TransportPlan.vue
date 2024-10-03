@@ -1,12 +1,19 @@
 <template>
     <div class="flex-col">
-        <div class="flex flex-col w-60 bg-[#103135] h-fit pb-4 rounded-t-lg">
+        <div
+            class="flex flex-col w-full bg-[#103135] h-fit pb-4 rounded-t-lg pr-1 pl-1"
+        >
             <div class="text-white text-2xl text-center mt-2 mb-2">
                 {{ pageVariables.transport.unit_number }}
             </div>
             <div class="bg-white h-0.5 w-full"></div>
             <!-- Items -->
-            <TruckItem :mainTruck="pageVariables.transport.unit_number"></TruckItem>
+            <TruckItem
+                :mainTruck="pageVariables.transport.unit_number"
+            ></TruckItem>
+            <!-- <form class="mt-5 self-center" @submit.prevent="submit()">
+                <input @focusout="submit()" :value="pageVariables.transport.notes" type="text" class="w-[92%] ml-2">
+            </form> -->
         </div>
         <div class="flex mt-1 space-x-2">
             <Link
@@ -35,7 +42,14 @@
 
 <script setup>
 import TruckItem from "./TruckItem.vue";
-import { Link } from "@inertiajs/vue3";
+import { Link, useForm } from "@inertiajs/vue3";
 
+// const form = reactive({
+//     note: "",
+// });
+
+// function submit(){
+//     router.put('',form);
+// }
 let pageVariables = defineProps({ transport: Object, subunits: Object });
 </script>
