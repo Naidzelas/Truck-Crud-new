@@ -7,7 +7,7 @@
                     key == mainTruck &&
                     Date.parse(today) > Date.parse(plan.end_date)
                 "
-                class="flex space-x-4 bg-white pr-4 mt-4 mr-2 ml-2"
+                class="flex space-x-4 bg-white pr-4 mt-4 mr-2 ml-2 rounded-md"
             >
                 <Icon icon="mdi:truck" class="size-8 flex-1"></Icon>
                 <div class="text-lg text-[#103135] flex-1">
@@ -36,7 +36,7 @@
                     key == mainTruck &&
                     Date.parse(today) < Date.parse(plan.start_date)
                 "
-                class="flex space-x-4 bg-white pr-4 mt-4 mr-2 ml-2"
+                class="flex space-x-4 bg-white pr-4 mt-4 mr-2 ml-2 rounded-md"
             >
                 <Icon icon="mdi:truck" class="size-8 flex-1"></Icon>
                 <div class="text-lg text-[#103135] flex-1">
@@ -44,6 +44,7 @@
                 </div>
                 <Icon icon="fa6-solid:road-circle-xmark" class="size-8"></Icon>
             </div>
+
         </div>
     </div>
 </template>

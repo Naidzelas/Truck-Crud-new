@@ -34,47 +34,17 @@ class TransportController extends Controller
     {
         $seeder = new TruckSeeder;
         $seeder->run();
-
-        return to_route('index');
-
-        // if (
-        //     $request->year < 1900
-        //     || $request->year > Carbon::now()->add(5, 'days')->year) 
-        // {
-        //     return redirect('transports')->with('error', 'Wrong date');
-        // }4
-
-        // $validated = $this->validate($request, [
-        //     'unit_number' => 'required|string',
-        //     'year' => 'required|int',
-        //     'notes' => 'string',
-        // ]);
-
-        // $transport->fill($validated)->save();
-        // return redirect('transports');
-
     }
     public function update(Request $request, Transport $transport)
     {
-        // $this->validate($request, [
-        //     'unit_number' => 'required|string',
-        //     'year' => 'required|int',
-        //     'notes' => 'text',
-        // ]);
-
+        dd($request->note);
         $transport->fill($request->validated())->save();
         return redirect('transports');
 
-    }
-    public function store(Request $request, Transport $transport)
-    {
-        return redirect('transports');
     }
 
     public function destroy(Request $request, Transport $transport)
     {
         $transport->where('id',$request->id)->delete();
-
-        return to_route('index');
     }
 }
