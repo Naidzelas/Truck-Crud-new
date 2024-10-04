@@ -5,7 +5,7 @@ Run project in terminal
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 TODOS:
 
-    1. fix isAvailable() to cover all cases for date coverage.
+    1. fix isAvailable() to cover all cases for date coverage. (Done)
     2. add check to isAvailable() if subunit is already planned on other transport.
     3. add note insert function.
     4. refactor namings.
