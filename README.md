@@ -2,17 +2,17 @@ Run project in terminal
 
     npm run dev 
     php artisan serve
------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-TODOS:
+---
+TODOS
 
-    1. fix isAvailable() to cover all cases for date coverage. (Done)
-    2. add check to isAvailable() if subunit is already planned on other transport.
-    3. add note insert function.
-    4. refactor namings.
-    5. sort out laravel backend validation issue with inertiajs.
-    6. tailwind styling.
+- [x] fix isAvailable() to cover all cases for date coverage.
+- [ ] add check to isAvailable() if subunit is already planned on other transport.
+- [x] add note insert function.
+- [ ] refactor namings.
+- [ ] sort out laravel backend validation issue with inertiajs.
+- [ ] tailwind styling.
 
------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---
 
 Užduotis
 1. CRUD
