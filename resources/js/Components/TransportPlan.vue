@@ -11,9 +11,8 @@
             <TruckItem
                 :mainTruck="pageVariables.transport.unit_number"
             ></TruckItem>
-            <!-- <form class="mt-5 self-center" @submit.prevent="submit()">
-                <input @focusout="submit()" :value="pageVariables.transport.notes" type="text" class="w-[92%] ml-2">
-            </form> -->
+            <label for="note" class="text-white mt-3 ml-2">Notes</label>
+            <input @focusout="submit(pageVariables.transport.id)" name="note" v-model="note" ref="noteInput" type="text" class="w-[92%] self-center rounded p-1 mt-3 h-fit">
         </div>
         <div class="flex mt-1 space-x-2">
             <Link
@@ -42,14 +41,18 @@
 
 <script setup>
 import TruckItem from "./TruckItem.vue";
-import { Link, useForm } from "@inertiajs/vue3";
+import { Link, router } from "@inertiajs/vue3";
+import { ref, reactive } from "vue";
 
-// const form = reactive({
-//     note: "",
-// });
-
-// function submit(){
-//     router.put('',form);
-// }
 let pageVariables = defineProps({ transport: Object, subunits: Object });
+
+let note = ref(pageVariables.transport.notes);
+
+function submit(id){
+    router.post(route('update'), {
+        _method: 'patch',
+        note: note.value,
+        id: id,
+    })
+}
 </script>
