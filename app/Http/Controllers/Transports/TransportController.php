@@ -37,6 +37,10 @@ class TransportController extends Controller
     }
     public function update(Request $request, Transport $transport)
     {
+        $request->validate([
+            'note' => 'string|max:255',
+        ]);
+        
         $transport->where('id',$request->id)->update([
             'notes' => $request->note
         ]);
@@ -44,6 +48,10 @@ class TransportController extends Controller
 
     public function destroy(Request $request, Transport $transport)
     {
+        $request->validate([
+            'id' => 'required',
+        ]);
+
         $transport->where('id',$request->id)->delete();
     }
 }

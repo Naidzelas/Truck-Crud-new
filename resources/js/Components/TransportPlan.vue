@@ -13,13 +13,14 @@
             ></TruckItem>
             <label for="note" class="text-white mt-3 ml-2">Notes</label>
             <input
-                @focusout="submit(pageVariables.transport.id)"
-                name="note"
-                v-model="note"
-                ref="noteInput"
-                type="text"
-                class="w-[92%] self-center rounded p-1 mt-3 h-fit"
+            @focusout="submit(pageVariables.transport.id)"
+            name="note"
+            v-model="note"
+            ref="noteInput"
+            type="text"
+            class="w-[92%] self-center rounded p-1 mt-3 h-fit"
             />
+            <div v-if="er.note" class="text-red-500 ml-2 animate-pulse mt-1 font-bold">{{ er.note }}</div>
         </div>
         <div class="flex mt-1 space-x-2">
             <Link
@@ -48,10 +49,17 @@
 
 <script setup>
 import TruckItem from "./TruckItem.vue";
-import { Link, router } from "@inertiajs/vue3";
-import { ref } from "vue";
+import { Link, router, usePage } from "@inertiajs/vue3";
+import { ref, computed } from "vue";
 
-let pageVariables = defineProps({ transport: Object, subunits: Object });
+let pageVariables = defineProps({
+    transport: Object,
+    subunits: Object,
+    errors: Object,
+});
+
+const page = usePage();
+const er = computed(() =>page.props.errors);
 
 let note = ref(pageVariables.transport.notes);
 

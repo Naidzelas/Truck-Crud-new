@@ -56,6 +56,9 @@
                                 ></DatePicker>
                             </div>
                         </div>
+                        <div v-if="er.transport" class="text-red-500 animate-pulse mt-1 font-bold">{{ er.transport }}</div>
+                        <div v-if="er.subunit" class="text-red-500 animate-pulse mt-1 font-bold">{{ er.subunit }}</div>
+                        <div v-if="er.date" class="text-red-500 animate-pulse mt-1 font-bold">{{ er.date }}</div>
                     </div>
                     <!-- fun part -->
                     <div>
@@ -173,7 +176,7 @@
 </template>
 
 <script setup>
-import { Link, useForm } from "@inertiajs/vue3";
+import { Link, useForm, usePage } from "@inertiajs/vue3";
 import { ref, onMounted, watch, computed } from "vue";
 import DatePicker from "@vuepic/vue-datepicker";
 import "@vuepic/vue-datepicker/dist/main.css";
@@ -191,6 +194,9 @@ const form = useForm({
     transport: pageVariables.transport,
     subunit: null,
 });
+
+const page = usePage();
+const er = computed(() =>page.props.errors);
 
 onMounted(() => {
     const startDate = new Date();
