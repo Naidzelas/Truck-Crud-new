@@ -70,19 +70,30 @@
                                 <div
                                     v-if="
                                         availableTransport.unit_number !=
-                                        transport
-                                        && isAvailable(availableTransport.unit_number)
+                                            transport &&
+                                        isAvailable(
+                                            availableTransport.unit_number
+                                        )
                                     "
                                 >
                                     <input
                                         type="radio"
-                                        @input="form.subunit = availableTransport.unit_number"
+                                        @input="
+                                            form.subunit =
+                                                availableTransport.unit_number
+                                        "
                                         name="subunit"
-                                        :id="'subunit-' + availableTransport.unit_number"
+                                        :id="
+                                            'subunit-' +
+                                            availableTransport.unit_number
+                                        "
                                         class="peer sr-only"
                                     />
                                     <label
-                                        :for="'subunit-' + availableTransport.unit_number"
+                                        :for="
+                                            'subunit-' +
+                                            availableTransport.unit_number
+                                        "
                                         class="flex bg-[#F2F2F2] space-x-4 p-4 2 text-gray-800 border border-gray-800 rounded-lg cursor-pointer peer-checked:border-[#4F0062] peer-checked:bg-[#f6e6fa] peer-checked:text-[#4F0062] hover:text-black hover:bg-gray-200"
                                     >
                                         <Icon
@@ -137,12 +148,7 @@
                                 {{ plan.start_date + " - " + plan.end_date }}
                             </div>
                             <Link
-                                :href="
-                                    route(
-                                        'sub_unit.destroy',
-                                        plan.id
-                                    )
-                                "
+                                :href="route('sub_unit.destroy', plan.id)"
                                 :data="plan"
                                 method="delete"
                                 as="button"
@@ -164,10 +170,10 @@
 
 <script setup>
 import { Link, useForm } from "@inertiajs/vue3";
-import { ref, onMounted, watch, nextTick, computed } from "vue";
+import { ref, onMounted, watch, computed } from "vue";
 import DatePicker from "@vuepic/vue-datepicker";
 import "@vuepic/vue-datepicker/dist/main.css";
-import { lt, se } from "date-fns/locale";
+import { lt } from "date-fns/locale";
 
 let pageVariables = defineProps({
     transport: String,
@@ -194,38 +200,45 @@ onMounted(() => {
 watch(date, (newDate) => {
     form.date = newDate;
     firstDate = form.date[0];
-    secondDate =  form.date[1];
+    secondDate = form.date[1];
 });
 
 const format = (date) => {
     if (date && date.length >= 2) {
-        return `${date[0].toLocaleDateString("lt-LT")} - ${date[1].toLocaleDateString("lt-LT")}`;
+        return `${date[0].toLocaleDateString(
+            "lt-LT"
+        )} - ${date[1].toLocaleDateString("lt-LT")}`;
     } else {
         return "Invalid date range";
     }
 };
+
 let firstDate = computed(() => form.date[0]);
 let secondDate = computed(() => form.date[1]);
 
 const isAvailable = (truck) => {
-    if(pageVariables.transportsUnits[truck]){
-        let start = new Date(Object.entries(pageVariables.transportsUnits[truck])[0][1]['start_date']);
-        let end = new Date(Object.entries(pageVariables.transportsUnits[truck])[0][1]['end_date']);
+    if (pageVariables.transportsUnits[truck]) {
+        let start = new Date(
+            Object.entries(pageVariables.transportsUnits[truck])[0][1][
+                "start_date"
+            ]
+        );
+        let end = new Date(
+            Object.entries(pageVariables.transportsUnits[truck])[0][1][
+                "end_date"
+            ]
+        );
         if (firstDate && secondDate) {
-            if((start >= firstDate && start <= secondDate) 
-                || (start >= firstDate && start <= secondDate) 
-                    || (end <= secondDate && end <= firstDate)
-                        || (end >= secondDate && end <= firstDate)){
+            if (Math.min(end, secondDate) - Math.max(start, firstDate) <= 0) {
                 return true;
             } else {
                 return false;
             }
         } else {
-            console.error('First date or second date is not defined.');
+            console.error("First date or second date is not defined.");
             return false;
         }
     }
     return true;
-}
-
+};
 </script>
