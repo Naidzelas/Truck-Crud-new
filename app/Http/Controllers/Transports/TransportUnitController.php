@@ -35,13 +35,12 @@ class TransportUnitController extends Controller
     public function store(Request $request, TransportSubunit $transportSubunit)
     {
 
-        // $validated = $request->validate([
-        //     'main_truck' => 'required|string',
-        //     'subunit' => 'required|string',
-        //     'start_date' => 'required|string',
-        //     'end_date' => 'required|string',
-        // ]);
-;
+        $request->validate([
+            'transport' => 'required|string',
+            'subunit' => 'required|string',
+            'date' => 'required|array',
+        ]);
+
         $transportSubunit->create([
             'main_truck' => $request->transport,
             'subunit' => $request->subunit,
@@ -52,6 +51,10 @@ class TransportUnitController extends Controller
     }
     public function destroy(Request $request, TransportSubunit $transportSubunit)
     {
+        $request->validate([ 
+            'id' => 'required',
+        ]);
+
         $transportSubunit->where('id',$request->id)->delete();
     }
 }
