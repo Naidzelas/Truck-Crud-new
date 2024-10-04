@@ -9,8 +9,8 @@ TODOS
 - [ ] add check to isAvailable() if subunit is already planned on other transport.
 - [x] add note insert function.
 - [ ] refactor namings.
-- [ ] sort out laravel backend validation issue with inertiajs.
-- [ ] tailwind styling.
+- [x] sort out laravel backend validation issue with inertiajs.
+- [ ] tailwind styling/responsive design.
 
 ---
 
