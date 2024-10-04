@@ -42,7 +42,7 @@ class TransportUnitController extends Controller
         //     'start_date' => 'required|string',
         //     'end_date' => 'required|string',
         // ]);
-// dd($test);
+;
         $transportSubunit->create([
             'main_truck' => $request->transport,
             'subunit' => $request->subunit,

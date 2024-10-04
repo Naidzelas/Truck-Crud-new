@@ -37,10 +37,9 @@ class TransportController extends Controller
     }
     public function update(Request $request, Transport $transport)
     {
-        dd($request->note);
-        $transport->fill($request->validated())->save();
-        return redirect('transports');
-
+        $transport->where('id',$request->id)->update([
+            'notes' => $request->note
+        ]);
     }
 
     public function destroy(Request $request, Transport $transport)
