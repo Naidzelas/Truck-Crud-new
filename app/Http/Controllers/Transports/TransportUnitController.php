@@ -6,7 +6,6 @@ use App\Models\Transports\TransportSubunit;
 use App\Http\Controllers\Controller;
 use App\Models\Transports\Transport;
 use Illuminate\Http\Request;
-use Illuminate\Validation\ValidationException;
 use Inertia\Inertia;
 
 class TransportUnitController extends Controller
