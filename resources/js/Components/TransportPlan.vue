@@ -12,7 +12,14 @@
                 :mainTruck="pageVariables.transport.unit_number"
             ></TruckItem>
             <label for="note" class="text-white mt-3 ml-2">Notes</label>
-            <input @focusout="submit(pageVariables.transport.id)" name="note" v-model="note" ref="noteInput" type="text" class="w-[92%] self-center rounded p-1 mt-3 h-fit">
+            <input
+                @focusout="submit(pageVariables.transport.id)"
+                name="note"
+                v-model="note"
+                ref="noteInput"
+                type="text"
+                class="w-[92%] self-center rounded p-1 mt-3 h-fit"
+            />
         </div>
         <div class="flex mt-1 space-x-2">
             <Link
@@ -48,11 +55,11 @@ let pageVariables = defineProps({ transport: Object, subunits: Object });
 
 let note = ref(pageVariables.transport.notes);
 
-function submit(id){
-    router.post(route('update'), {
-        _method: 'patch',
+function submit(id) {
+    router.post(route("update"), {
+        _method: "patch",
         note: note.value,
         id: id,
-    })
+    });
 }
 </script>

@@ -1,7 +1,11 @@
 <template>
     <div class="flex justify-center p-36">
         <div class="flex flex-col w-full">
-            <div class="mt-16 mb-32 text-center text-6xl tracking-wide font-semibold font-mono">ACTIVE TRANSPORT</div>
+            <div
+                class="mt-16 mb-32 text-center text-6xl tracking-wide font-semibold font-mono"
+            >
+                ACTIVE TRANSPORT
+            </div>
             <Link
                 href="/create"
                 method="get"
@@ -29,5 +33,5 @@ import { provide } from "vue";
 
 let pageVariables = defineProps({ transports: Object, subunitData: Object });
 
-provide('subunits', pageVariables.subunitData);
+provide("subunits", pageVariables.subunitData);
 </script>

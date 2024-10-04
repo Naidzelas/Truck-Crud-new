@@ -1,7 +1,11 @@
 <template>
     <div class="flex justify-center p-36">
         <div class="flex flex-col w-full">
-            <div class="mt-16 mb-32 text-center text-6xl tracking-wide font-semibold font-mono">CREATE PLAN</div>
+            <div
+                class="mt-16 mb-32 text-center text-6xl tracking-wide font-semibold font-mono"
+            >
+                CREATE PLAN
+            </div>
             <form @submit.prevent="form.post('sub_unit')">
                 <div class="flex space-x-4 justify-end">
                     <Link
