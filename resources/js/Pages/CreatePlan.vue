@@ -1,7 +1,7 @@
 <template>
     <div class="flex justify-center p-36">
         <div class="flex flex-col w-full">
-            <div class="mt-16 mb-32 text-center text-6xl">Create plan</div>
+            <div class="mt-16 mb-32 text-center text-6xl tracking-wide font-semibold font-mono">CREATE PLAN</div>
             <form @submit.prevent="form.post('sub_unit')">
                 <div class="flex space-x-4 justify-end">
                     <Link
@@ -9,14 +9,14 @@
                         method="get"
                         as="button"
                         type="button"
-                        class="bg-[#956E6E] w-32 h-8 self-end mb-2 text-white font-semibold text-xl"
-                        >Back</Link
+                        class="bg-[#956E6E] w-32 pt-1 pb-1 h-fit self-end mb-2 text-white font-semibold text-xl tracking-wide align-middle hover:bg-[#684c4c]"
+                        >BACK</Link
                     >
                     <button
                         type="submit"
-                        class="bg-[#956E6E] w-32 h-8 self-end mb-2 text-white font-semibold text-xl"
+                        class="bg-[#956E6E] w-32 pt-1 pb-1 h-fit self-end mb-2 text-white font-semibold text-xl align-middle hover:bg-[#684c4c]"
                     >
-                        Save
+                        SAVE
                     </button>
                 </div>
                 <div class="bg-[#600000] w-full h-1 mb-8"></div>

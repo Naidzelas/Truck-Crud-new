@@ -42,7 +42,7 @@
 <script setup>
 import TruckItem from "./TruckItem.vue";
 import { Link, router } from "@inertiajs/vue3";
-import { ref, reactive } from "vue";
+import { ref } from "vue";
 
 let pageVariables = defineProps({ transport: Object, subunits: Object });
 
